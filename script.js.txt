@@ -1,0 +1,31 @@
+const productsEl = document.getElementById('products');
+const cartCount = document.getElementById('cart-count');
+let cart = 0;
+
+// Dummy products array
+const products = [];
+
+for (let i = 1; i <= 100; i++) {
+  products.push({
+    name: `Product ${i}`,
+    price: Math.floor(Math.random() * 7500) + 500, // 500-8000 PKR
+    img: `https://picsum.photos/300/400?random=${i}`
+  });
+}
+
+// Render products
+products.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.innerHTML = `
+    <img src="${p.img}" alt="${p.name}">
+    <h3>${p.name}</h3>
+    <p>PKR ${p.price}</p>
+    <button>Add to Cart</button>
+  `;
+  card.querySelector('button').addEventListener('click', () => {
+    cart++;
+    cartCount.textContent = cart;
+  });
+  productsEl.appendChild(card);
+});
